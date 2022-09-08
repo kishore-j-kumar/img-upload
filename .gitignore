@@ -5,6 +5,7 @@
 env
 
 # misc
+.DS_Store
 .git
 .idea
 __pycache__

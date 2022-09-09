@@ -1,23 +1,30 @@
 import logo from './logo.svg';
 import './App.css';
+import {useState} from "react";
 
 function App() {
+  const [selectedImage, setSelectedImage] = useState(null);
+  const formData = new FormData();
+  const fileField = document.querySelector('input[type="file"]');
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>IMGUpload</h1>
+      {selectedImage && (
+        <div>
+        <img alt="Image not found" width={"250px"} src={URL.createObjectURL(selectedImage)} />
+        <br />
+        <button onClick={()=>setSelectedImage(null)}>Remove</button>
+        </div>
+      )}
+      <br />
+
+      <br />
+        <form  method='post' action='/upload_image'>
+            <label htmlFor="img">Select image:</label>
+            <input type="file" id="img" name="img" accept="image/*"></input>
+            <input type="submit" value="Upload"></input>
+        </form>
     </div>
   );
 }
